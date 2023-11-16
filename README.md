@@ -19,13 +19,13 @@ Either the `filename` or `files` parameter is required.  If both are passed in, 
 ## Examples
 
 ```yaml
-uses: inkarnaterpg/environment-variable-replacer
+uses: inkarnaterpg/environment-variable-replacer@main
 with:
   filename: /src/package.json
 ```
 
 ```yaml
-uses: inkarnaterpg/environment-variable-replacer
+uses: inkarnaterpg/environment-variable-replacer@main
 with:
   files: |
     /package.json
