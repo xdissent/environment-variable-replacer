@@ -2,6 +2,8 @@
 
 set -e
 
+echo "----- Environment Variable Replacer -----"
+
 # Escaping methods from https://stackoverflow.com/questions/29613304/is-it-possible-to-escape-regex-metacharacters-reliably-with-sed
 quoteSubst() {
   IFS= read -d '' -r < <(sed -e ':a' -e '$!{N;ba' -e '}' -e 's/[&/\]/\\&/g; s/\n/\\&/g' <<<"$1")
@@ -31,6 +33,7 @@ else
 fi
 MIN_LENGTH=$(($MIN_LENGTH))
 
+echo "Replacing env vars with a length of ${MIN_LENGTH} or more in the following files: ${FILENAMES}"
 
 while read -r -d "" var; do
   name="${var%%=*}"
