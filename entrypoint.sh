@@ -50,7 +50,7 @@ while read -r -d "" var; do
     while read -r file; do
       echo "  in file ${file}"
       sed -i -e ':a' -e '$!{N;ba' -e '}' -e "s/${searchEscaped}/${replaceEscaped}/"  ${file}
-    done < <(printf '%s' $FILENAMES)
+    done < <(printf '%s\n' "$FILENAMES")
   fi
 done < <(printenv -0)
 
