@@ -1,0 +1,22 @@
+name: 'Environment Variable Replacer'
+description: 'Replaces __ENV_VARIABLE_NAME__ placeholders in files with environment variable values.'
+author: 'Inkarnate'
+branding:
+  icon: 'terminal'
+  color: 'red'
+inputs:
+  filename:
+    description: 'File for replacement.'
+  files:
+    description: 'A newline delimited list of files for replacement.'
+  min-variable-length:
+    description: 'Environment variable names must be at least this many characters long to be processed, or set to 0 to process all variables.'
+    required: false
+    default: '2'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    ACTION_INPUTS_FILENAME: ${{ inputs.filename }}
+    ACTION_INPUTS_FILENAMES: ${{ inputs.files }}
+    ACTION_INPUTS_MIN_VARIABLE_LENGTH: ${{ inputs.filename }}
