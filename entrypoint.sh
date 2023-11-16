@@ -36,12 +36,11 @@ MIN_LENGTH=$(($MIN_LENGTH))
 echo "Replacing env vars with a length of ${MIN_LENGTH} or more in the following files: ${FILENAMES}"
 
 while read -r -d "" var; do
-  echo "Processing $var"
   name="${var%%=*}"
   value="${var#*=}"
   if [ ${#name} -ge $MIN_LENGTH  ] && [ "$name" != "ACTION_INPUTS_MIN_VARIABLE_LENGTH" ] && [ "$name" != "ACTION_INPUTS_FILENAME" ] && [ "$name" != "ACTION_INPUTS_FILENAMES" ]
   then
-    echo "Setting ${name} to ${value}."
+    echo "Setting ${name} to ${value} ..."
     search="__${name}__"
     searchEscaped=$(quoteRe "$search")
 
@@ -49,8 +48,9 @@ while read -r -d "" var; do
     replaceEscaped=$(quoteSubst "$replace")
 
     while read -r file; do
-      sed -i -e ':a' -e '$!{N;ba' -e '}' -e "s/${searchEscaped}/${replaceEscaped}/"  file
-    done < <($FILENAMES)
+      echo "  in file ${file}"
+      sed -i -e ':a' -e '$!{N;ba' -e '}' -e "s/${searchEscaped}/${replaceEscaped}/"  ${file}
+    done < <(printf '%s' $FILENAMES)
   fi
 done < <(printenv -0)
 
