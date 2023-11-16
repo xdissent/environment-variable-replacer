@@ -48,8 +48,11 @@ while read -r -d "" var; do
     replaceEscaped=$(quoteSubst "$replace")
 
     while read -r file; do
+    if [[ ${#file} -gt 1 ]]
+    then
       echo "  in file ${file}"
       sed -i -e ':a' -e '$!{N;ba' -e '}' -e "s/${searchEscaped}/${replaceEscaped}/"  ${file}
+    fi
     done < <(printf '%s\n' "$FILENAMES")
   fi
 done < <(printenv -0)
