@@ -52,6 +52,6 @@ while read -r -d "" var; do
       sed -i -e ':a' -e '$!{N;ba' -e '}' -e "s/${searchEscaped}/${replaceEscaped}/"  file
     done < <($FILENAMES)
   fi
-done < <(printenv --null)
+done < <(printenv -0)
 
 echo "...Done!"
