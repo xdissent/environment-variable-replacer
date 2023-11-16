@@ -19,4 +19,4 @@ runs:
   env:
     ACTION_INPUTS_FILENAME: ${{ inputs.filename }}
     ACTION_INPUTS_FILENAMES: ${{ inputs.files }}
-    ACTION_INPUTS_MIN_VARIABLE_LENGTH: ${{ inputs.filename }}
+    ACTION_INPUTS_MIN_VARIABLE_LENGTH: ${{ inputs.min-variable-length }}
