@@ -51,7 +51,7 @@ while read -r -d "" var; do
     if [[ ${#file} -gt 1 ]]
     then
       echo "  in file ${file}"
-      sed -i -e ':a' -e '$!{N;ba' -e '}' -e "s/${searchEscaped}/${replaceEscaped}/"  ${file}
+      sed -i -e ':a' -e '$!{N;ba' -e '}' -e "s/${searchEscaped}/${replaceEscaped}/g"  ${file}
     fi
     done < <(printf '%s\n' "$FILENAMES")
   fi
