@@ -13,6 +13,10 @@ inputs:
     description: 'Environment variable names must be at least this many characters long to be processed, or set to 0 to process all variables.'
     required: false
     default: '2'
+  pattern:
+    description: 'Replacement search pattern.'
+    required: false
+    default: '__${name}__'
 runs:
   using: 'docker'
   image: 'Dockerfile'
