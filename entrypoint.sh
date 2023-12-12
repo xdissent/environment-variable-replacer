@@ -33,6 +33,13 @@ else
 fi
 MIN_LENGTH=$(($MIN_LENGTH))
 
+if [[ -z "${ACTION_INPUTS_PATTERN}" ]]
+then
+  PATTERN='__${name}__'
+else
+  PATTERN="${ACTION_INPUTS_PATTERN}"
+fi
+
 echo "Replacing env vars with a length of ${MIN_LENGTH} or more in the following files: ${FILENAMES}"
 
 while read -r -d "" var; do
@@ -41,7 +48,7 @@ while read -r -d "" var; do
   if [ ${#name} -ge $MIN_LENGTH  ] && [ "$name" != "ACTION_INPUTS_MIN_VARIABLE_LENGTH" ] && [ "$name" != "ACTION_INPUTS_FILENAME" ] && [ "$name" != "ACTION_INPUTS_FILENAMES" ]
   then
     echo "Setting ${name} to ${value} ..."
-    search="__${name}__"
+    search=$(echo "$PATTERN" | sed "s/$(quoteSubst '${name}')/$(quoteSubst "${name}")/")
     searchEscaped=$(quoteRe "$search")
 
     replace=$value
